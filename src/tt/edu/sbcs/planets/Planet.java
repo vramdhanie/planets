@@ -30,7 +30,16 @@ public class Planet {
         this.setSize(size);
         this.setAngle(angle);
         setPosition();
-        paint = new LinearGradientPaint((float)x, (float)y, (float)(x + size), (float)(y + size), new float[]{0.1f, 0.9f}, new Color[]{Color.WHITE, new Color((float)Math.random(), (float)Math.random(), (float)Math.random())});
+        paint = new LinearGradientPaint(
+            (float)x, (float)y, (float)(x + size), (float)(y + size), 
+            new float[]{0.1f, 0.9f}, 
+            new Color[]{
+                Color.WHITE, 
+                new Color(
+                    (float)Math.random(), 
+                    (float)Math.random(), 
+                    (float)Math.random()
+                )});
     }
 
     public void setPosition(){

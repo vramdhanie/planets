@@ -1,6 +1,9 @@
 package tt.edu.sbcs.planets;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 
 /**
@@ -15,6 +18,7 @@ public class Planet {
     double x;
     double y;
     Paint paint;
+    Shape shape;
 
     public Planet(){
         this(100);
@@ -31,7 +35,7 @@ public class Planet {
         this.setAngle(angle);
         setPosition();
         paint = new LinearGradientPaint(
-            (float)x, (float)y, (float)(x + size), (float)(y + size), 
+            0, 0, (float)size, (float)size,
             new float[]{0.1f, 0.9f}, 
             new Color[]{
                 Color.WHITE, 
@@ -40,6 +44,18 @@ public class Planet {
                     (float)Math.random(), 
                     (float)Math.random()
                 )});
+        shape = new Ellipse2D.Double(0, 0, size, size);
+
+        Timer timer = new Timer(16, new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move();
+                //System.out.println(this);
+            }
+        });
+        timer.start();
+
     }
 
     public void setPosition(){
@@ -50,13 +66,14 @@ public class Planet {
     }
 
     public void move(){
-        setAngle(getAngle() + 1);
+        setAngle(getAngle() + 0.01);
         setPosition();
     }
 
     public void draw(Graphics2D g2){
+        g2.translate(x, y);
         g2.setPaint(paint);
-        g2.fill(new Ellipse2D.Double(x, y, size, size));
+        g2.fill(shape);
     }
 
     public double getDistance() {

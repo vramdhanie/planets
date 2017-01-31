@@ -1,2 +1,2 @@
-# planets
+# Planets
 Some basic Swing animation illustration

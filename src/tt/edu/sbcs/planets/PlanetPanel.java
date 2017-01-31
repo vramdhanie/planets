@@ -29,11 +29,11 @@ public class PlanetPanel extends JPanel {
             @Override
             public void keyTyped(KeyEvent e) {
                 super.keyTyped(e);
-                if(e.getKeyCode() == KeyEvent.VK_S){
+                if(e.getKeyChar() == KeyEvent.VK_S){
                     timer.start();
                 }
 
-                if(e.getKeyCode() == KeyEvent.VK_D){
+                if(e.getKeyChar() == KeyEvent.VK_D){
                     timer.stop();
                 }
             }
@@ -44,5 +44,6 @@ public class PlanetPanel extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         p.draw((Graphics2D)g);
+        //System.out.println("Repainting...");
     }
 }

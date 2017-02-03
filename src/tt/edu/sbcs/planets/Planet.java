@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.NoninvertibleTransformException;
 
 /**
  * Parametric equation for a circle:
@@ -71,9 +73,16 @@ public class Planet {
     }
 
     public void draw(Graphics2D g2){
-        g2.translate(x, y);
+        AffineTransform af = new AffineTransform();
+        af.translate(x, y);
+        g2.transform(af);
         g2.setPaint(paint);
         g2.fill(shape);
+        try {
+            g2.transform(af.createInverse());
+        } catch (NoninvertibleTransformException e) {
+            e.printStackTrace();
+        }
     }
 
     public double getDistance() {

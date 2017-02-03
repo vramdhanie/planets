@@ -13,6 +13,7 @@ import java.util.List;
 public class PlanetPanel extends JPanel {
 
     List<Planet> planets;
+    Sun sun;
     Timer timer;
     public final static int NUMBER_PLANETS = 8;
 
@@ -26,6 +27,7 @@ public class PlanetPanel extends JPanel {
             planets.add(new Planet(dist, (Math.random() * 30) + 10, (Math.random() * 360)));
             dist += (Math.random() * 10) + 50;
         }
+        sun = new Sun();
 
         timer = new Timer(16, new ActionListener() {
             @Override
@@ -56,5 +58,6 @@ public class PlanetPanel extends JPanel {
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         planets.stream().forEach(p->p.draw((Graphics2D) g));
+        sun.draw((Graphics2D)g);
     }
 }

@@ -41,10 +41,12 @@ public class PlanetPanel extends JPanel {
                 super.keyTyped(e);
                 if(e.getKeyChar() == KeyEvent.VK_S){
                     timer.start();
+                    planets.stream().forEach(Planet::start);
                 }
 
                 if(e.getKeyChar() == KeyEvent.VK_D){
                     timer.stop();
+                    planets.stream().forEach(Planet::stop);
                 }
             }
         });

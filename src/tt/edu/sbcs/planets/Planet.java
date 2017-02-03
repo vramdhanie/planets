@@ -23,6 +23,7 @@ public class Planet {
     Shape shape;
     double speed;
     Shape orbit;
+    Timer timer;
 
     public Planet(){
         this(100);
@@ -56,7 +57,7 @@ public class Planet {
                 distance * 2,
                 distance * 2);
 
-        Timer timer = new Timer(16, new ActionListener(){
+        timer = new Timer(16, new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -64,9 +65,18 @@ public class Planet {
                 //System.out.println(this);
             }
         });
-        timer.start();
+
 
     }
+
+    public void start(){
+        timer.start();
+    }
+
+    public void stop(){
+        timer.stop();
+    }
+
 
     public void setPosition(){
         double cx = PlanetFrame.WIDTH / 2;
@@ -85,7 +95,7 @@ public class Planet {
         g2.setColor(Color.WHITE);
         g2.draw(orbit);
         AffineTransform af = new AffineTransform();
-        af.translate(x, y);
+        af.translate(x - (size/2), y - (size/2));
         g2.transform(af);
         g2.setPaint(paint);
         g2.fill(shape);

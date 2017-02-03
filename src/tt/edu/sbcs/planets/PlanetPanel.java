@@ -1,21 +1,31 @@
 package tt.edu.sbcs.planets;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
 
 public class PlanetPanel extends JPanel {
 
-    Planet p;
+    List<Planet> planets;
     Timer timer;
+    public final static int NUMBER_PLANETS = 8;
 
     public PlanetPanel(){
         super();
         setBackground(Color.BLACK);
-        p = new Planet(200, 30, 45);
+
+        planets = new ArrayList<>();
+        float dist = 100;
+        for(int i = 0; i < NUMBER_PLANETS; i++) {
+            planets.add(new Planet(dist, (Math.random() * 30) + 10, (Math.random() * 360)));
+            dist += (Math.random() * 10) + 50;
+        }
 
         timer = new Timer(16, new ActionListener() {
             @Override
@@ -43,7 +53,6 @@ public class PlanetPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        p.draw((Graphics2D)g);
-        //System.out.println("Repainting...");
+        planets.stream().forEach(p->p.draw((Graphics2D) g));
     }
 }

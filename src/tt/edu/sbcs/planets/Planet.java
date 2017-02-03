@@ -21,6 +21,8 @@ public class Planet {
     double y;
     Paint paint;
     Shape shape;
+    double speed;
+    Shape orbit;
 
     public Planet(){
         this(100);
@@ -36,6 +38,7 @@ public class Planet {
         this.setSize(size);
         this.setAngle(angle);
         setPosition();
+        speed = Math.random() * 0.01;
         paint = new LinearGradientPaint(
             0, 0, (float)size, (float)size,
             new float[]{0.1f, 0.9f}, 
@@ -47,6 +50,11 @@ public class Planet {
                     (float)Math.random()
                 )});
         shape = new Ellipse2D.Double(0, 0, size, size);
+        orbit = new Ellipse2D.Double(
+                (PlanetFrame.WIDTH/2) - distance,
+                (PlanetFrame.HEIGHT/2) - distance,
+                distance * 2,
+                distance * 2);
 
         Timer timer = new Timer(16, new ActionListener(){
 
@@ -68,11 +76,14 @@ public class Planet {
     }
 
     public void move(){
-        setAngle(getAngle() + 0.01);
+        setAngle(getAngle() + speed);
         setPosition();
     }
 
     public void draw(Graphics2D g2){
+
+        g2.setColor(Color.WHITE);
+        g2.draw(orbit);
         AffineTransform af = new AffineTransform();
         af.translate(x, y);
         g2.transform(af);

@@ -13,17 +13,17 @@ import java.awt.geom.NoninvertibleTransformException;
  * x = cx + r * cos(a)
  * y = cy + r * sin(a)
  */
-public class Planet {
+public class Planet implements Serializable{
     private double distance;
     private double size;
     private double angle;
     double x;
     double y;
-    Paint paint;
+    transient Paint paint;
     Shape shape;
     double speed;
     Shape orbit;
-    Timer timer;
+    transient Timer timer;
 
     public Planet(){
         this(100);

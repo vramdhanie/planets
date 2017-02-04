@@ -6,7 +6,7 @@ import java.awt.geom.Ellipse2D;
 /**
  * Created by vincent on 02/02/2017.
  */
-public class Sun {
+public class Sun implements Serializable{
     Shape shape;
     public Sun(){
         shape = new Ellipse2D.Double(PlanetFrame.WIDTH / 2 - 50, PlanetFrame.HEIGHT / 2 - 50, 100, 100);
